@@ -15,8 +15,8 @@ import com.vaadin.ui.*;
  *
  */
 @Title("Website Monitoring")
-@Theme("mytheme")
-@Widgetset("com.msviridenkov.websitemonitoring.MyAppWidgetset")
+@Theme("valo")
+//@Widgetset("com.msviridenkov.websitemonitoring.MyAppWidgetset")
 public class WebsiteMonitoringUI extends UI {
 
     Grid websiteList = new Grid();
@@ -34,7 +34,7 @@ public class WebsiteMonitoringUI extends UI {
         pingAll.addClickListener(e -> pingAll());
 
         websiteList.setContainerDataSource(new BeanItemContainer<>(Website.class));
-        websiteList.setColumnOrder("name", "url", "availability", "pingTime");
+        websiteList.setColumnOrder("name", "url", "status", "responseTime");
         websiteList.removeColumn("id");
         refreshWebsites();
     }
@@ -46,12 +46,7 @@ public class WebsiteMonitoringUI extends UI {
     }
 
     private void refreshWebsites() {
-        if (service != null) {
-            websiteList.setContainerDataSource(new BeanItemContainer<>(
-                    Website.class, service.findAll()));
-        } else {
-            System.out.println("service is null");
-        }
+        websiteList.setContainerDataSource(new BeanItemContainer<>(Website.class, service.findAll()));
     }
 
     private void pingAll() {

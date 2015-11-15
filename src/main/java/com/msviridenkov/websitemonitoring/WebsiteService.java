@@ -66,10 +66,10 @@ public class WebsiteService {
             connection.connect();
             long pingTime = System.currentTimeMillis() - startTime;
 
-            website.setAvailability(connection.getResponseCode() == 200);
-            website.setPingTime(pingTime);
+            website.setStatus(connection.getResponseCode() == 200);
+            website.setResponseTime(pingTime);
         } catch (IOException exception) {
-            website.setAvailability(false);
+            website.setStatus(false);
         }
 
         return website;

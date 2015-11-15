@@ -9,8 +9,8 @@ public class Website {
 
     private String name = "";
     private String url = "";
-    private String availability = "";
-    private String pingTime = "";
+    private String status = "";
+    private String responseTime = "";
 
     public Long getId() {
         return id;
@@ -36,24 +36,24 @@ public class Website {
         this.url = url;
     }
 
-    public String getAvailability() {
-        return availability;
+    public String getStatus() {
+        return status;
     }
 
-    public void setAvailability(boolean availability) {
-        if (availability) {
-            this.availability = "Yes";
+    public void setStatus(boolean status) {
+        if (status) {
+            this.status = "Up";
         } else {
-            this.availability = "No";
+            this.status = "Down";
         }
 
     }
 
-    public String getPingTime() {
-        return pingTime;
+    public String getResponseTime() {
+        return responseTime;
     }
 
-    public void setPingTime(long pingTime) {
-        this.pingTime = Long.toString(pingTime);
+    public void setResponseTime(long responseTime) {
+        this.responseTime = Long.toString(responseTime);
     }
 }
