@@ -60,9 +60,15 @@ public class Website {
     public void setResponseTime(long responseTime) {
         this.responseTime = Long.toString(responseTime);
     }
+    public void setStringResponseTime(String responseTime) {
+        this.responseTime = responseTime;
+    }
 
     public Website ping() {
         String url = this.getUrl();
+        if (url == "http://") {
+            url = "";
+        }
 
         try {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
@@ -76,6 +82,7 @@ public class Website {
             this.setResponseTime(pingTime);
         } catch (IOException exception) {
             this.setStatus(false);
+            this.setStringResponseTime("");
         }
 
         return this;
