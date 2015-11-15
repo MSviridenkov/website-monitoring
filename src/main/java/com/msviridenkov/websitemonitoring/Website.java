@@ -1,6 +1,10 @@
 package com.msviridenkov.websitemonitoring;
 
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  * Created by msviridenkov on 14.11.15.
  */
@@ -55,5 +59,25 @@ public class Website {
 
     public void setResponseTime(long responseTime) {
         this.responseTime = Long.toString(responseTime);
+    }
+
+    public Website ping() {
+        String url = this.getUrl();
+
+        try {
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.setConnectTimeout(3000);
+
+            long startTime = System.currentTimeMillis();
+            connection.connect();
+            long pingTime = System.currentTimeMillis() - startTime;
+
+            this.setStatus(connection.getResponseCode() == 200);
+            this.setResponseTime(pingTime);
+        } catch (IOException exception) {
+            this.setStatus(false);
+        }
+
+        return this;
     }
 }

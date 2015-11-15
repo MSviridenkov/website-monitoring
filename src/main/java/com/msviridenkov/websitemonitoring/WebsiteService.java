@@ -1,8 +1,5 @@
 package com.msviridenkov.websitemonitoring;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,33 +42,17 @@ public class WebsiteService {
         websites.put(website.getId(), website);
     }
 
+    public void ping(Website website) {
+        websites.put(website.getId(), website.ping());
+    }
+
     public List<Website> findAll() {
         return new ArrayList<>(websites.values());
     }
 
     public void pingAll() {
         for (Website website : websites.values()) {
-            websites.put(website.getId(), ping(website));
+            ping(website);
         }
-    }
-
-    public static Website ping(Website website) {
-        String url = website.getUrl();
-
-        try {
-            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-            connection.setConnectTimeout(3000);
-
-            long startTime = System.currentTimeMillis();
-            connection.connect();
-            long pingTime = System.currentTimeMillis() - startTime;
-
-            website.setStatus(connection.getResponseCode() == 200);
-            website.setResponseTime(pingTime);
-        } catch (IOException exception) {
-            website.setStatus(false);
-        }
-
-        return website;
     }
 }
