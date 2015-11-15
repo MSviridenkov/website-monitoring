@@ -1,6 +1,6 @@
 Website Monitoring Service
 ====================
-
+This app uses and requires Java 8 to work.
 
 Running from the command line
 -------------------
