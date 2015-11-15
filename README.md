@@ -1,6 +1,7 @@
 Website Monitoring Service
 ====================
 This app uses and requires Java 8 to work.
+Front-end by Vaadin Framework.
 
 Running from the command line
 -------------------
